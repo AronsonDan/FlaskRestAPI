@@ -9,7 +9,7 @@ from security import authenticate, identity
 
 # Declare the Flask app
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://qurbppsijzqymd:0c31efb337fbd063538ee7e6585e3abc254f37b71c4fcb9598517ef3576d607a@ec2-54-75-231-85.eu-west-1.compute.amazonaws.com:5432/d70q403p5r0vq7'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'jose'
 
