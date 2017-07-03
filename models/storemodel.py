@@ -2,11 +2,14 @@ from db import db
 
 
 class StoreModel(db.Model):
+    # state the table name
     __tablename__ = 'stores'
 
+    # create table columns and define its attributes
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
 
+    # define the relationships between objects within the DB
     items = db.relationship('ItemModel', lazy='dynamic')
 
     def __init__(self, name):
