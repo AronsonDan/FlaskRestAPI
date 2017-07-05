@@ -36,4 +36,4 @@ class UserRegister(Resource):
             user.save_to_db()
             return {"message": "User created successfully"}, 201
         else:
-            return {"message": "{}, is not a possible role. user creation failed"}, 422 # Unprocessable entity.
+            return {"message": "{}, is not a possible role. user creation failed"}.format(data['role']), 422 # Unprocessable entity.

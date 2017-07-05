@@ -14,6 +14,8 @@ def identity(payload):
     user_id = payload['identity']
     user = UserModel.find_by_id(user_id)
     payload['role'] = user.role
+    print('Printing Payload!!!')
     print(payload)
+    print(payload['role'])
 
     return user
