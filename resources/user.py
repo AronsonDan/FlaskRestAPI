@@ -1,4 +1,3 @@
-import sqlite3
 from flask_restful import Resource, reqparse
 from models.usermodel import UserModel
 
@@ -8,12 +7,17 @@ class UserRegister(Resource):
     parser.add_argument('username',
                         required=True,
                         type=str,
-                        help="This field cannot be left blank!!!"
+                        help="username was not specified in the request, the request cannot be processed"
                         )
     parser.add_argument('password',
                         required=True,
                         type=str,
-                        help="This field cannot be left blank!!!"
+                        help="password was not specified in the request, the request cannot be processed"
+                        )
+    parser.add_argument('role',
+                        required=True,
+                        type=str,
+                        help="Role was not specified in the request, the request cannot be processed"
                         )
 
     def post(self):
@@ -22,7 +26,6 @@ class UserRegister(Resource):
         if UserModel.find_by_username(data['username']):
             return {"message": "User already exists"}, 400
 
-        print(data['username'], data['password'])
         user = UserModel(**data)
         user.save_to_db()
 
