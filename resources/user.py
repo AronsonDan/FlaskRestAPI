@@ -3,6 +3,9 @@ from models.usermodel import UserModel
 
 
 class UserRegister(Resource):
+    def __init__(self):
+        self.user_roles = ["Admin", "User"]
+
     parser = reqparse.RequestParser()
     parser.add_argument('username',
                         required=True,
@@ -20,6 +23,8 @@ class UserRegister(Resource):
                         help="Role was not specified in the request, the request cannot be processed"
                         )
 
+
+
     def post(self):
         data = UserRegister.parser.parse_args()
 
@@ -27,6 +32,8 @@ class UserRegister(Resource):
             return {"message": "User already exists"}, 400
 
         user = UserModel(**data)
-        user.save_to_db()
-
-        return {"message": "User created successfully"}, 201
+        if user.role in self.user_roles:
+            user.save_to_db()
+            return {"message": "User created successfully"}, 201
+        else:
+            return {"message": "{}, is not a possible role. user creation failed"}, 422 # Unprocessable entity.
