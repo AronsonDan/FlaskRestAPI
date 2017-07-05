@@ -19,6 +19,7 @@ class Item(Resource):
 
     @jwt_required()
     def get(self, name):
+        print(get_current_user())
         item = ItemModel.find_by_name(name)
         if item:
             return item.json()
@@ -50,7 +51,7 @@ class Item(Resource):
 
     @jwt_required()
     def put(self, name):
-        print(get_current_user)
+        print(get_current_user())
         request_data = Item.parser.parse_args()
 
         item = ItemModel.find_by_name(name)
